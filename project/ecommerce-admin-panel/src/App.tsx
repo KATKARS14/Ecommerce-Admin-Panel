@@ -1,38 +1,27 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { Layout } from 'antd';
-import Navbar from './components/Navbar';
-import Sidebar from './components/Sidebar';
-import ProtectedRoute from './components/ProtectedRoute';
-import Login from './pages/Login';
-import Dashboard from './pages/Dashboard';
-import Products from './pages/Products';
-import Users from './pages/Users';
-import Orders from './pages/Orders';
-import { ThemeProvider } from './context/themeProvider';
+import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
+import Login from "./pages/Login";
+import Dashboard from "./pages/Dashboard";
+import Users from "./pages/Users";
+import Products from "./pages/Products";
+import Orders from "./pages/Orders";
+import Analytics from "./pages/Analytics";
 
-const { Content } = Layout;
 
-const App = () => {
+const App: React.FC = () => {
   return (
-    <ThemeProvider>
-      <Router>
-        <Layout style={{ minHeight: '100vh' }}>
-          <Sidebar />
-          <Layout>
-            <Navbar />
-            <Content style={{ margin: '20px', padding: '20px', background: '#fff' }}>
-              <Routes>
-                <Route path='/' element={<Login />} />
-                <Route path='/dashboard' element={<ProtectedRoute allowedRoles={['admin', 'staff']}><Dashboard /></ProtectedRoute>} />
-                <Route path='/products' element={<ProtectedRoute allowedRoles={['admin', 'staff']}><Products /></ProtectedRoute>} />
-                <Route path='/users' element={<ProtectedRoute allowedRoles={['admin']}><Users /></ProtectedRoute>} />
-                <Route path='/orders' element={<ProtectedRoute allowedRoles={['admin', 'staff']}><Orders /></ProtectedRoute>} />
-              </Routes>
-            </Content>
-          </Layout>
-        </Layout>
-      </Router>
-    </ThemeProvider>
+    <Router>
+      <Routes>
+
+        <Route path="/login" element={<Login />} />
+        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/users" element={<Users />} />
+        <Route path="/orders" element={<Orders />} />
+        <Route path="/products" element={<Products />} />
+        <Route path="/analytics" element={<Analytics />} />
+
+        <Route path="*" element={<Navigate to="/login" />} />
+      </Routes>
+    </Router>
   );
 };
 
