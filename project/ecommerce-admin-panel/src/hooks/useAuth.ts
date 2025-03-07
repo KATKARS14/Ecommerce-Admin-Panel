@@ -1,18 +1,23 @@
 /*import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-//import useAuthStore from '../context/authStore';
+import useAuthStore from '../store/authStore';
 
 const useAuth = () => {
-    const { user, token, logout } = useAuthStore();
+    const { token, setToken } = useAuthStore();
     const navigate = useNavigate();
 
     useEffect(() => {
         if (!token) {
-            navigate('/');
+            navigate('/login');
         }
     }, [token, navigate]);
 
-    return { user, token, logout };
+    const logout = () => {
+        setToken(null);
+        navigate('/login');
+    };
+
+    return { token, setToken, logout };
 };
 
 export default useAuth;*/

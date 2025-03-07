@@ -1,3 +1,4 @@
+// src/api/auth.ts
 import axios from 'axios';
 
 type AuthResponse = {
@@ -5,6 +6,6 @@ type AuthResponse = {
 };
 
 export const loginUser = async (username: string, password: string): Promise<AuthResponse> => {
-    const response = await axios.post<AuthResponse>('https://fakestoreapi.com/auth/login', { username, password });
+    const response = await axios.post<AuthResponse>('/auth/login', { username, password });
     return response.data;
 };
